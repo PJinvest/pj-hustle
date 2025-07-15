@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,6 +25,7 @@ import {
 } from "lucide-react";
 import { HustleCard } from "@/components/HustleCard";
 import { PhaseDetails } from "@/components/PhaseDetails";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const hustleIdeas = [
   {
@@ -666,9 +666,9 @@ const Index = () => {
   const selectedHustleData = selectedHustle ? hustleIdeas.find(h => h.id === selectedHustle) : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100 sticky top-0 z-50">
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-purple-100 dark:border-gray-700 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -679,12 +679,15 @@ const Index = () => {
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   PJ7 Hustle
                 </h1>
-                <p className="text-sm text-gray-600">Your step-by-step guide to income generation</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Your step-by-step guide to income generation</p>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
-              17 Proven Strategies
-            </Badge>
+            <div className="flex items-center space-x-3">
+              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                17 Proven Strategies
+              </Badge>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -694,41 +697,41 @@ const Index = () => {
           <div className="space-y-8">
             {/* Overview Section */}
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-4xl font-bold text-gray-900">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
                 Transform Ideas Into Income
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Each hustle follows the same proven 3-phase approach: Start lean (MVP), build systems, then automate for passive income.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
-                <Card className="border-purple-200 bg-purple-50/50">
+                <Card className="border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/20">
                   <CardHeader className="text-center pb-3">
-                    <Target className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-purple-900">Phase 1: MVP</CardTitle>
+                    <Target className="h-8 w-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
+                    <CardTitle className="text-lg text-purple-900 dark:text-purple-300">Phase 1: MVP</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <p className="text-purple-700">Start with one client, one product. Validate and learn.</p>
+                    <p className="text-purple-700 dark:text-purple-300">Start with one client, one product. Validate and learn.</p>
                   </CardContent>
                 </Card>
                 
-                <Card className="border-blue-200 bg-blue-50/50">
+                <Card className="border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/20">
                   <CardHeader className="text-center pb-3">
-                    <Zap className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-blue-900">Phase 2: Scale</CardTitle>
+                    <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                    <CardTitle className="text-lg text-blue-900 dark:text-blue-300">Phase 2: Scale</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <p className="text-blue-700">Build repeatable systems and standardized processes.</p>
+                    <p className="text-blue-700 dark:text-blue-300">Build repeatable systems and standardized processes.</p>
                   </CardContent>
                 </Card>
                 
-                <Card className="border-green-200 bg-green-50/50">
+                <Card className="border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/20">
                   <CardHeader className="text-center pb-3">
-                    <TrendingUp className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-green-900">Phase 3: Automate</CardTitle>
+                    <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
+                    <CardTitle className="text-lg text-green-900 dark:text-green-300">Phase 3: Automate</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <p className="text-green-700">Semi-automated income with minimal manual effort.</p>
+                    <p className="text-green-700 dark:text-green-300">Semi-automated income with minimal manual effort.</p>
                   </CardContent>
                 </Card>
               </div>
@@ -736,10 +739,10 @@ const Index = () => {
 
             {/* Hustle Ideas Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {hustleIdeas.map((hustle) => (
+              {hustleIdeas.map((hustle, index) => (
                 <HustleCard
                   key={hustle.id}
-                  hustle={hustle}
+                  hustle={{...hustle, number: index + 1}}
                   onClick={() => setSelectedHustle(hustle.id)}
                 />
               ))}
