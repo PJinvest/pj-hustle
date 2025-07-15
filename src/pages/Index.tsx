@@ -1,874 +1,489 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
-import { 
-  FileText, 
-  MessageSquare, 
-  Languages, 
-  Video, 
-  BookOpen, 
-  Package, 
-  PenTool, 
-  ShoppingCart, 
-  Calendar, 
-  User, 
-  Link, 
-  Users, 
-  Heart, 
-  Lightbulb,
-  TrendingUp,
-  Target,
-  Zap
-} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { HustleCard } from "@/components/HustleCard";
 import { PhaseDetails } from "@/components/PhaseDetails";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { 
+  PenTool, 
+  MessageSquare, 
+  FileText, 
+  Users, 
+  Camera, 
+  TrendingUp, 
+  ArrowLeft 
+} from "lucide-react";
 
-const hustleIdeas = [
+const hustles = [
   {
     id: 1,
-    title: "AI Prompt Packs",
-    description: "Create targeted AI prompt collections for specific audiences",
-    icon: FileText,
-    earning: "R100-R250",
+    title: "Logo Design Service",
+    description: "Create professional logos for small businesses and startups using design tools like Canva Pro or Adobe Illustrator.",
+    icon: PenTool,
+    earning: "$50-200 per logo",
     difficulty: "Easy",
-    links: [
-      { name: "Gumroad", url: "https://gumroad.com", description: "Sell digital products easily" },
-      { name: "Canva", url: "https://canva.com", description: "Design professional PDFs" },
-      { name: "ChatGPT", url: "https://chat.openai.com", description: "Generate AI prompts" },
-      { name: "Notion", url: "https://notion.so", description: "Create organized prompt collections" }
-    ],
+    number: 1,
     phases: [
       {
         phase: 1,
-        title: "Manual PDF Sales",
-        description: "Create simple PDFs with Canva/Notion, sell via WhatsApp/Gumroad",
-        tasks: ["Research target audience", "Create 10-20 quality prompts", "Design PDF with Canva", "Set up Gumroad store", "Market on WhatsApp groups"],
+        title: "MVP Setup",
+        description: "Launch your basic logo design service",
+        tasks: [
+          "Set up Canva Pro account ($12.99/month) and master logo templates - spend 2-3 hours learning advanced features like brand kits, custom fonts, and transparent backgrounds",
+          "Create 10-15 sample logos in different styles (minimalist, vintage, modern, tech, restaurant themes) - save these as portfolio pieces on Behance or Dribbble",
+          "Post on local Facebook groups offering logos for $25-50 - search for '[Your City] Business Network' or 'Small Business [Your Area]' groups",
+          "Create simple Gumroad store listing 'Logo Design Service' with your portfolio images and clear pricing tiers (Basic $25, Premium $50, Complete Brand Kit $100)",
+          "Study 20+ competitor logos on 99designs and Fiverr - note popular color schemes, typography choices, and industry-specific design trends"
+        ],
         timeframe: "1-2 weeks",
-        investment: "R0-R50",
-        expectedEarning: "R500-R2000/month"
+        investment: "$15-30",
+        expectedEarning: "$200-500"
       },
       {
         phase: 2,
-        title: "Bundle & Premium Themes",
-        description: "Create themed bundles and premium prompt collections",
-        tasks: ["Create 3-5 themed bundles", "Design premium templates", "Set up email marketing", "Build customer base"],
-        timeframe: "2-3 weeks",
-        investment: "R200-R500",
-        expectedEarning: "R2000-R5000/month"
+        title: "Scale Operations",
+        description: "Expand your reach and increase pricing",
+        tasks: [
+          "Raise prices to $75-150 per logo after completing 10+ orders - create 'Premium Designer' positioning with before/after case studies",
+          "Create logo packages: Basic Logo ($75), Logo + Business Card ($125), Complete Brand Identity ($200) including color palette, fonts, and usage guidelines",
+          "Join 15+ Facebook business groups, post helpful design tips weekly, soft-pitch your services in comments (not main posts to avoid spam rules)",
+          "Partner with 3-5 local web designers, offer 20% commission for referrals - reach out via LinkedIn with portfolio and partnership proposal template",
+          "Set up automated Calendly booking system with design questionnaire - ask about industry, target audience, preferred colors, competitors they like/dislike"
+        ],
+        timeframe: "1-2 months",
+        investment: "$50-100",
+        expectedEarning: "$1,000-2,500"
       },
       {
         phase: 3,
-        title: "Automated Delivery",
-        description: "Automate sales and resell through Telegram channels",
-        tasks: ["Set up automated Gumroad delivery", "Create Telegram channels", "Build affiliate network", "Scale marketing"],
-        timeframe: "1 month",
-        investment: "R500-R1000",
-        expectedEarning: "R5000-R15000/month"
+        title: "Automate & Scale",
+        description: "Build systems for consistent income",
+        tasks: [
+          "Hire 2-3 freelance designers from Philippines/India at $5-15 per logo via Upwork - create detailed brand guidelines and approval process",
+          "Create premium pricing tier ($200-500) for 'Senior Designer' work - position as exclusive service with 1-week turnaround and 3 revision rounds",
+          "Build email sequence for past clients: 6-month brand refresh offers, business card updates, social media template packages",
+          "Launch referral program: existing clients get $25 credit for each new customer they bring - create shareable referral links and tracking system",
+          "Develop logo subscription service for agencies: $297/month for 10 logos - market to marketing agencies, web design firms, and business consultants"
+        ],
+        timeframe: "2-3 months",
+        investment: "$200-500",
+        expectedEarning: "$3,000-8,000"
       }
+    ],
+    links: [
+      { name: "Canva Pro", url: "https://www.canva.com/pro/", description: "Professional design tools" },
+      { name: "Gumroad", url: "https://gumroad.com", description: "Sell your design services" },
+      { name: "99designs", url: "https://99designs.com", description: "Study competitor pricing" },
+      { name: "Behance", url: "https://www.behance.net", description: "Showcase your portfolio" }
     ]
   },
   {
     id: 2,
-    title: "WhatsApp Bio & Auto-Reply Setup",
-    description: "Professional WhatsApp Business setup for local businesses",
+    title: "Social Media Manager",
+    description: "Manage social media accounts for local businesses, creating content and growing their online presence.",
     icon: MessageSquare,
-    earning: "R150-R300",
-    difficulty: "Easy",
-    links: [
-      { name: "WhatsApp Business", url: "https://business.whatsapp.com", description: "Download WhatsApp Business app" },
-      { name: "Meta Business", url: "https://business.facebook.com/tools/whatsapp", description: "WhatsApp Business features guide" },
-      { name: "Local Facebook Groups", url: "https://facebook.com/groups", description: "Find local business groups" }
-    ],
+    earning: "$300-1500 per client",
+    difficulty: "Medium",
+    number: 2,
     phases: [
       {
         phase: 1,
-        title: "Basic Setup Service",
-        description: "Manual WhatsApp Business configuration for local shops",
-        tasks: ["Learn WhatsApp Business features", "Create service templates", "Find first 5 clients", "Document process"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1500-R3000/month"
+        title: "MVP Setup",
+        description: "Start managing your first clients",
+        tasks: [
+          "Master ChatGPT prompts for content creation - learn specific prompts like 'Create 10 Instagram captions for a [type] business targeting [audience] with trending hashtags'",
+          "Create content templates for 5 business types (restaurants, fitness, beauty, retail, professional services) - develop 30-day content calendars for each",
+          "Offer free 1-week trial to 3 local businesses - approach coffee shops, gyms, salons with before/after social media audits showing improvement potential",
+          "Learn basic Canva for post creation and Hootsuite/Buffer for scheduling - spend 5 hours practicing with different post formats and optimal posting times",
+          "Study successful local business pages - analyze top performing posts, engagement rates, hashtag strategies, and posting frequency patterns"
+        ],
+        timeframe: "2-3 weeks",
+        investment: "$30-50",
+        expectedEarning: "$300-800"
       },
       {
         phase: 2,
-        title: "Package Solutions",
-        description: "Complete packages with menus and price lists",
-        tasks: ["Create menu templates", "Design price list formats", "Build package offerings", "Standardize pricing"],
-        timeframe: "2 weeks",
-        investment: "R100-R300",
-        expectedEarning: "R3000-R8000/month"
+        title: "Scale Operations",
+        description: "Grow your client base and increase rates",
+        tasks: [
+          "Increase rates to $500-800/month after proving ROI with case studies showing follower growth, engagement rates, and lead generation",
+          "Develop specialized packages: Content Only ($300), Content + Management ($500), Full Service + Ads ($800) with clear deliverables for each tier",
+          "Create social media audit service ($150 one-time) - identify posting gaps, competitor analysis, hashtag optimization, bio improvements",
+          "Build relationships with 10+ local business networking groups - attend meetings, offer free social media tips, collect business cards for follow-up",
+          "Partner with web designers and marketing agencies for referrals - offer 15% commission and co-marketing opportunities"
+        ],
+        timeframe: "2-3 months",
+        investment: "$100-200",
+        expectedEarning: "$2,000-5,000"
       },
       {
         phase: 3,
-        title: "Subscription Service",
-        description: "Order forms and ongoing subscription management",
-        tasks: ["Build order form system", "Create subscription tiers", "Automate client onboarding", "Scale operations"],
-        timeframe: "3 weeks",
-        investment: "R500-R1000",
-        expectedEarning: "R8000-R20000/month"
+        title: "Automate & Scale",
+        description: "Build a social media agency",
+        tasks: [
+          "Hire virtual assistants for content creation and basic engagement - train them on brand voice, community management, and crisis response protocols",
+          "Create premium tier ($1200-2000/month) including paid ad management, influencer outreach, and monthly strategy calls",
+          "Develop social media courses ($197-497) teaching business owners DIY strategies - create video modules on content planning, hashtag research, engagement tactics",
+          "Launch done-for-you content packages for industries: '$297/month for 30 ready-to-post graphics and captions' targeting specific niches",
+          "Build software tool for social media audits and reporting - white-label solution you can sell to other agencies for $97/month"
+        ],
+        timeframe: "3-4 months",
+        investment: "$500-1000",
+        expectedEarning: "$5,000-15,000"
       }
+    ],
+    links: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI content creation" },
+      { name: "Hootsuite", url: "https://hootsuite.com", description: "Social media scheduling" },
+      { name: "Canva", url: "https://www.canva.com", description: "Create social media graphics" },
+      { name: "Buffer", url: "https://buffer.com", description: "Schedule and analyze posts" }
     ]
   },
   {
     id: 3,
-    title: "Flyer/Menu Translation",
-    description: "AI-powered translation services for local businesses",
-    icon: Languages,
-    earning: "R50-R200",
+    title: "Resume Writing Service",
+    description: "Help job seekers create professional resumes and cover letters using proven templates and industry knowledge.",
+    icon: FileText,
+    earning: "$75-300 per resume",
     difficulty: "Easy",
-    links: [
-      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI translation tool" },
-      { name: "Canva", url: "https://canva.com", description: "Design translated flyers" },
-      { name: "Google Translate", url: "https://translate.google.com", description: "Quick translation reference" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "Study competitor pricing" }
-    ],
+    number: 3,
     phases: [
       {
         phase: 1,
-        title: "Manual Translation",
-        description: "Use ChatGPT for English-local language translations",
-        tasks: ["Master ChatGPT translation prompts", "Create quality templates", "Find local businesses", "Build portfolio"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1000-R3000/month"
+        title: "MVP Setup",
+        description: "Launch your resume writing service",
+        tasks: [
+          "Research ATS-friendly resume formats and study 50+ successful resumes on LinkedIn and Indeed - note formatting, keyword usage, and achievement quantification",
+          "Create 5 template variations for different industries (tech, healthcare, sales, management, entry-level) using Google Docs or Canva with proper formatting",
+          "Practice with 5 free resumes for friends/family - gather testimonials, before/after examples, and refine your revision process based on feedback",
+          "Set up Gumroad listing with clear packages: Basic Resume ($75), Resume + Cover Letter ($125), LinkedIn Optimization Bundle ($150)",
+          "Post in job search Facebook groups offering resume reviews - provide genuine value first, then mention your paid services in comments"
+        ],
+        timeframe: "1-2 weeks",
+        investment: "$20-40",
+        expectedEarning: "$300-600"
       },
       {
         phase: 2,
-        title: "Design Upsell",
-        description: "Add flyer design services to translation offerings",
-        tasks: ["Learn Canva design", "Create design templates", "Package translation + design", "Increase pricing"],
-        timeframe: "2 weeks",
-        investment: "R200-R400",
-        expectedEarning: "R3000-R7000/month"
+        title: "Scale Operations",
+        description: "Expand services and increase pricing",
+        tasks: [
+          "Increase pricing to $150-250 based on industry specialization (tech resumes command higher rates) - develop expertise in high-paying sectors",
+          "Add LinkedIn profile optimization ($100), interview prep calls ($75/hour), and salary negotiation coaching ($150) to service menu",
+          "Partner with career coaches and university career centers - offer 20% referral fees and co-host resume workshops for students and alumni",
+          "Create industry-specific resume guides and sell as digital products ($29-47) - target trending fields like remote work, AI, healthcare, cybersecurity",
+          "Develop relationships with 10+ recruiting agencies - offer bulk resume formatting services at discounted rates for steady workflow"
+        ],
+        timeframe: "1-2 months",
+        investment: "$75-150",
+        expectedEarning: "$1,500-3,500"
       },
       {
         phase: 3,
-        title: "Team Scaling",
-        description: "Hire assistants and scale fulfillment",
-        tasks: ["Recruit freelance translators", "Create quality standards", "Build order management", "Focus on marketing"],
-        timeframe: "1 month",
-        investment: "R1000-R2000",
-        expectedEarning: "R7000-R20000/month"
+        title: "Automate & Scale",
+        description: "Build comprehensive career services",
+        tasks: [
+          "Hire 2-3 specialized writers for different industries - train them on your templates, quality standards, and client communication protocols",
+          "Launch premium executive resume service ($400-800) targeting C-suite and senior management - partner with executive search firms for referrals",
+          "Create subscription model: '$197/month Career Accelerator' including monthly resume updates, LinkedIn optimization, and job search strategy calls",
+          "Develop AI-powered resume builder tool and license to universities, libraries, and workforce development centers for $500-2000/month per location",
+          "Build online course 'Land Your Dream Job in 30 Days' ($297-497) including resume templates, interview scripts, and job search automation tools"
+        ],
+        timeframe: "2-3 months",
+        investment: "$300-600",
+        expectedEarning: "$4,000-10,000"
       }
+    ],
+    links: [
+      { name: "Indeed Resume", url: "https://www.indeed.com/career-advice/resumes-cover-letters", description: "Study successful resume examples" },
+      { name: "LinkedIn", url: "https://www.linkedin.com", description: "Research industry trends" },
+      { name: "Gumroad", url: "https://gumroad.com", description: "Sell resume services" },
+      { name: "Canva", url: "https://www.canva.com", description: "Create professional resume templates" }
     ]
   },
   {
     id: 4,
-    title: "Video Resume Scripts",
-    description: "AI-generated scripts for personal video introductions",
-    icon: Video,
-    earning: "R200-R400",
+    title: "Virtual Event Hosting",
+    description: "Host engaging virtual events, webinars, and online workshops for businesses and communities.",
+    icon: Users,
+    earning: "$200-1000 per event",
     difficulty: "Medium",
-    links: [
-      { name: "ElevenLabs", url: "https://elevenlabs.io", description: "AI voice generation" },
-      { name: "LinkedIn", url: "https://linkedin.com", description: "Find job seekers" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" },
-      { name: "Upwork", url: "https://upwork.com", description: "Find freelance clients" }
-    ],
+    number: 4,
     phases: [
       {
         phase: 1,
-        title: "Script Writing",
-        description: "Convert CVs to engaging video scripts using AI",
-        tasks: ["Develop AI prompts for scripts", "Create script templates", "Test with pilot clients", "Refine process"],
-        timeframe: "1-2 weeks",
-        investment: "R0-R100",
-        expectedEarning: "R2000-R5000/month"
+        title: "MVP Setup",
+        description: "Start hosting your first virtual events",
+        tasks: [
+          "Master Zoom/Teams advanced features - practice breakout rooms, screen sharing, polls, recording, and technical troubleshooting for 10+ hours",
+          "Create 3 workshop topics you can teach (productivity, social media basics, small business marketing) - develop 60-90 minute structured presentations",
+          "Host 2-3 free events to build testimonials and refine your presentation skills - record sessions for portfolio and promotional content",
+          "Set up Eventbrite page with professional bio, event descriptions, and clear pricing structure ($25-75 per attendee depending on topic)",
+          "Create simple tech setup checklist and backup plans - test lighting, audio, internet connection, and have phone hotspot ready"
+        ],
+        timeframe: "2-3 weeks",
+        investment: "$50-100",
+        expectedEarning: "$400-800"
       },
       {
         phase: 2,
-        title: "Visual CV Bundles",
-        description: "Add visual CV templates and bundles",
-        tasks: ["Create visual CV templates", "Bundle script + visual CV", "Develop premium packages", "Market to professionals"],
-        timeframe: "2-3 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R5000-R12000/month"
+        title: "Scale Operations",
+        description: "Expand your event offerings",
+        tasks: [
+          "Develop signature workshop series that commands $100-200 per person - create multi-part programs with workbooks and follow-up resources",
+          "Partner with business associations, chambers of commerce, and professional groups - offer to host monthly educational sessions for their members",
+          "Create corporate training packages ($500-2000 per session) for companies wanting employee development - focus on remote work skills, leadership, communication",
+          "Build email list of 500+ past attendees and send monthly event announcements - offer early bird discounts and VIP access to premium sessions",
+          "Develop interactive elements: networking breakouts, Q&A segments, live polls, and group exercises to increase engagement and referrals"
+        ],
+        timeframe: "1-2 months",
+        investment: "$100-250",
+        expectedEarning: "$2,000-5,000"
       },
       {
         phase: 3,
-        title: "AI Voiceover Add-on",
-        description: "Automated delivery with ElevenLabs voice generation",
-        tasks: ["Integrate ElevenLabs API", "Create voiceover options", "Automate entire process", "Scale marketing"],
-        timeframe: "1 month",
-        investment: "R800-R1500",
-        expectedEarning: "R12000-R30000/month"
+        title: "Automate & Scale",
+        description: "Build virtual event business",
+        tasks: [
+          "Launch monthly membership program ($47-97/month) with exclusive workshops, networking events, and resource library access",
+          "Create done-for-you event packages for other trainers/coaches - provide templates, marketing materials, and technical support for $297-497",
+          "Develop high-ticket mastermind programs ($2000-5000) combining group coaching, virtual retreats, and personalized business guidance",
+          "Build platform for hosting other speakers' events - take 20-30% commission while providing technical support, marketing, and audience",
+          "Create certification program teaching others to host virtual events - charge $1997-3997 for comprehensive training with ongoing support"
+        ],
+        timeframe: "3-4 months",
+        investment: "$500-1000",
+        expectedEarning: "$6,000-20,000"
       }
+    ],
+    links: [
+      { name: "Zoom", url: "https://zoom.us", description: "Professional video conferencing" },
+      { name: "Eventbrite", url: "https://www.eventbrite.com", description: "Event ticketing and promotion" },
+      { name: "Calendly", url: "https://calendly.com", description: "Easy event scheduling" },
+      { name: "Canva", url: "https://www.canva.com", description: "Create event graphics and slides" }
     ]
   },
   {
     id: 5,
-    title: "Business Starter PDFs",
-    description: "Step-by-step business guides for local hustles",
-    icon: BookOpen,
-    earning: "R150-R300",
+    title: "Product Photography",
+    description: "Provide professional product photos for e-commerce businesses and online sellers using smartphone or DSLR camera.",
+    icon: Camera,
+    earning: "$100-500 per shoot",
     difficulty: "Medium",
-    links: [
-      { name: "Gumroad", url: "https://gumroad.com", description: "Sell digital guides" },
-      { name: "Etsy", url: "https://etsy.com", description: "Digital marketplace" },
-      { name: "Canva", url: "https://canva.com", description: "Design professional guides" },
-      { name: "Telegram", url: "https://telegram.org", description: "Create sales channels" }
-    ],
+    number: 5,
     phases: [
       {
         phase: 1,
-        title: "Individual Guides",
-        description: "Create specific business guides using Canva",
-        tasks: ["Research popular local hustles", "Create detailed PDF guides", "Design with Canva", "Test market response"],
-        timeframe: "2 weeks",
-        investment: "R100-R200",
-        expectedEarning: "R2000-R4000/month"
+        title: "MVP Setup",
+        description: "Start your product photography service",
+        tasks: [
+          "Learn smartphone photography techniques - master lighting with windows, white background setups using poster board, and photo editing with VSCO or Lightroom Mobile",
+          "Practice with 20+ different product types (jewelry, clothing, electronics, food) - understand specific lighting needs and angle requirements for each category",
+          "Create before/after portfolio showing dramatic improvements - contact local businesses offering free photo shoots in exchange for testimonials and portfolio rights",
+          "Set up basic equipment: white seamless paper ($20), reflector ($15), tripod ($30) - learn to create professional-looking shots with minimal investment",
+          "Study top-selling products on Amazon/Etsy in your area - analyze their photo styles, number of images, and what makes listings convert well"
+        ],
+        timeframe: "2-3 weeks",
+        investment: "$100-200",
+        expectedEarning: "$500-1,200"
       },
       {
         phase: 2,
-        title: "Digital Shop",
-        description: "Build organized online shop for all guides",
-        tasks: ["Set up professional shop", "Organize guide categories", "Create bundle offers", "Implement SEO"],
-        timeframe: "2-3 weeks",
-        investment: "R500-R800",
-        expectedEarning: "R4000-R10000/month"
+        title: "Scale Operations",
+        description: "Expand your photography business",
+        tasks: [
+          "Invest in better equipment: DSLR camera ($400-600), lighting kit ($150-250), variety of backgrounds and props for different product styles",
+          "Develop packages: Basic 5 photos ($150), Standard 10 photos + editing ($250), Premium 15 photos + lifestyle shots ($400)",
+          "Create specialized services: 360° product spins ($75 extra), lifestyle photography with models ($500-800), Amazon A+ content creation ($300-500)",
+          "Build relationships with e-commerce agencies, Amazon FBA sellers groups, and Shopify store owners - offer volume discounts for bulk work",
+          "Partner with fulfillment centers and co-working spaces where e-commerce businesses operate - set up regular on-site photo days"
+        ],
+        timeframe: "1-2 months",
+        investment: "$600-1000",
+        expectedEarning: "$2,500-6,000"
       },
       {
         phase: 3,
-        title: "Licensing & Automation",
-        description: "License to resellers and automate updates",
-        tasks: ["Create reseller program", "Automate guide updates", "Build affiliate network", "Passive income focus"],
-        timeframe: "1 month",
-        investment: "R1000-R2000",
-        expectedEarning: "R10000-R25000/month"
+        title: "Automate & Scale",
+        description: "Build photography studio business",
+        tasks: [
+          "Set up dedicated studio space with permanent lighting setups - offer clients the option to visit or provide pickup/delivery service",
+          "Hire additional photographers and train them on your quality standards - create detailed shot lists and editing guidelines for consistency",
+          "Launch subscription service for e-commerce stores: '$497/month for 50 product photos' - target businesses with regular new inventory",
+          "Create done-for-you Amazon listing optimization service combining photography, copywriting, and keyword research for $800-1500 per listing",
+          "Develop online course teaching product photography ($297-497) and sell presets/templates for consistent income stream"
+        ],
+        timeframe: "2-4 months",
+        investment: "$1500-3000",
+        expectedEarning: "$5,000-15,000"
       }
+    ],
+    links: [
+      { name: "Amazon Seller Central", url: "https://sellercentral.amazon.com", description: "Find sellers needing photos" },
+      { name: "Shopify", url: "https://www.shopify.com", description: "Connect with e-commerce stores" },
+      { name: "Etsy", url: "https://www.etsy.com", description: "Study successful product listings" },
+      { name: "VSCO", url: "https://vsco.co", description: "Professional photo editing" }
     ]
   },
   {
     id: 6,
-    title: "Voice Notes to Study PDFs",
-    description: "Convert audio lectures to organized study materials",
-    icon: FileText,
-    earning: "R150-R300",
-    difficulty: "Medium",
-    links: [
-      { name: "Otter.ai", url: "https://otter.ai", description: "AI transcription service" },
-      { name: "Whisper by OpenAI", url: "https://openai.com/research/whisper", description: "Free transcription tool" },
-      { name: "Canva", url: "https://canva.com", description: "Format study materials" },
-      { name: "Student Facebook Groups", url: "https://facebook.com", description: "Find student clients" }
-    ],
+    title: "Online Course Creation",
+    description: "Create and sell educational courses on platforms like Udemy, teaching skills you already possess.",
+    icon: TrendingUp,
+    earning: "$500-5000 per course",
+    difficulty: "Hard",
+    number: 6,
     phases: [
       {
         phase: 1,
-        title: "Manual Conversion",
-        description: "Use Whisper/Otter.ai for transcription and formatting",
-        tasks: ["Master transcription tools", "Create formatting templates", "Find student clients", "Build quality process"],
-        timeframe: "1 week",
-        investment: "R100-R300",
-        expectedEarning: "R2000-R4000/month"
+        title: "MVP Setup",
+        description: "Create your first course",
+        tasks: [
+          "Identify your expertise area and validate demand - research trending topics on Udemy, Skillshare, and CourseUdemy using keyword tools and competitor analysis",
+          "Create detailed course outline with 20-30 lessons, each 5-10 minutes long - include practical exercises, downloadable resources, and clear learning objectives",
+          "Record pilot course using screen recording software (OBS Studio free, or Camtasia $299) - ensure good audio quality with external microphone ($50-100)",
+          "Upload to Udemy with compelling title, thumbnail, and description - study top courses in your category and model their successful elements",
+          "Create accompanying resources: worksheets, templates, checklists, and bonus materials that students can download and implement immediately"
+        ],
+        timeframe: "4-6 weeks",
+        investment: "$150-400",
+        expectedEarning: "$500-2,000"
       },
       {
         phase: 2,
-        title: "Study Pack Creation",
-        description: "Develop comprehensive study materials and packs",
-        tasks: ["Create study pack templates", "Add visual elements", "Bundle multiple subjects", "Premium pricing"],
-        timeframe: "2-3 weeks",
-        investment: "R400-R700",
-        expectedEarning: "R4000-R9000/month"
+        title: "Scale Operations",
+        description: "Expand your course portfolio",
+        tasks: [
+          "Create 2-3 additional courses in related topics - build a comprehensive learning path where students naturally progress from beginner to advanced levels",
+          "Develop premium course priced $200-500 with live Q&A sessions, private Facebook group, and personalized feedback on assignments",
+          "Launch on multiple platforms: Teachable, Thinkific, and your own website using tools like WordPress + LearnDash for higher profit margins",
+          "Build email list of students and create course bundle offers - cross-sell related courses and create loyalty among your student base",
+          "Partner with influencers and bloggers in your niche for affiliate promotions - offer 30-50% commission to drive traffic and sales"
+        ],
+        timeframe: "2-3 months",
+        investment: "$300-600",
+        expectedEarning: "$3,000-8,000"
       },
       {
         phase: 3,
-        title: "Tutor Partnerships",
-        description: "Scale through partnerships with tutors and educators",
-        tasks: ["Partner with local tutors", "Create revenue sharing", "Automate client acquisition", "Scale operations"],
-        timeframe: "1 month",
-        investment: "R800-R1500",
-        expectedEarning: "R9000-R25000/month"
+        title: "Automate & Scale",
+        description: "Build online education business",
+        tasks: [
+          "Create comprehensive learning academy with tiered pricing: Basic ($97), Pro ($297), Master ($597) with increasing levels of access and support",
+          "Develop certification programs that students can use for career advancement - partner with industry organizations for credibility and recognition",
+          "Launch mastermind program ($2000-5000) combining course access, group coaching calls, and done-with-you implementation sessions",
+          "Create white-label courses for corporations and training companies - license your content for $5000-20,000 plus ongoing royalties",
+          "Build automated webinar funnel selling your premium course - create evergreen sales system generating passive income 24/7"
+        ],
+        timeframe: "4-6 months",
+        investment: "$1000-2500",
+        expectedEarning: "$10,000-50,000"
       }
-    ]
-  },
-  {
-    id: 7,
-    title: "Digital Hustler Packs",
-    description: "Complete digital setup for WhatsApp sellers",
-    icon: Package,
-    earning: "R300-R500",
-    difficulty: "Medium",
-    links: [
-      { name: "WhatsApp Business", url: "https://business.whatsapp.com", description: "Business features guide" },
-      { name: "Canva", url: "https://canva.com", description: "Design templates" },
-      { name: "Telegram", url: "https://telegram.org", description: "Find WhatsApp sellers" },
-      { name: "Facebook Marketplace", url: "https://facebook.com/marketplace", description: "Connect with local sellers" }
     ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Packs",
-        description: "Create auto-replies, price lists, and order messages",
-        tasks: ["Develop pack templates", "Create customization process", "Find perfume/cake sellers", "Document workflows"],
-        timeframe: "2 weeks",
-        investment: "R0-R200",
-        expectedEarning: "R3000-R6000/month"
-      },
-      {
-        phase: 2,
-        title: "Template System",
-        description: "Standardize into repeatable templates",
-        tasks: ["Create template library", "Standardize pricing", "Build template customization", "Market to niches"],
-        timeframe: "2-3 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R6000-R15000/month"
-      },
-      {
-        phase: 3,
-        title: "Dashboard Shop",
-        description: "Automated dashboard for self-service purchases",
-        tasks: ["Build dashboard interface", "Automate pack generation", "Payment integration", "Scale marketing"],
-        timeframe: "1-2 months",
-        investment: "R1000-R3000",
-        expectedEarning: "R15000-R40000/month"
-      }
-    ]
-  },
-  {
-    id: 8,
-    title: "AI Product Descriptions",
-    description: "ChatGPT-powered product descriptions for sellers",
-    icon: PenTool,
-    earning: "R20-R50",
-    difficulty: "Easy",
     links: [
-      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI writing tool" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" },
-      { name: "WhatsApp Business Groups", url: "https://chat.whatsapp.com", description: "Find seller groups" },
-      { name: "Facebook Groups", url: "https://facebook.com/groups", description: "Local business communities" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Per-Item Service",
-        description: "Individual product descriptions using ChatGPT",
-        tasks: ["Perfect ChatGPT prompts", "Create quality templates", "Find WhatsApp sellers", "Build client base"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1500-R3000/month"
-      },
-      {
-        phase: 2,
-        title: "Bundle Offerings",
-        description: "Package deals and bulk description services",
-        tasks: ["Create bundle packages", "Offer bulk discounts", "Add category specialization", "Increase volume"],
-        timeframe: "2 weeks",
-        investment: "R100-R300",
-        expectedEarning: "R3000-R8000/month"
-      },
-      {
-        phase: 3,
-        title: "Self-Service Generator",
-        description: "Automated description generator tool",
-        tasks: ["Build web interface", "Integrate AI API", "Payment processing", "Market automation tool"],
-        timeframe: "1 month",
-        investment: "R1000-R2500",
-        expectedEarning: "R8000-R25000/month"
-      }
-    ]
-  },
-  {
-    id: 9,
-    title: "WhatsApp Ordering Systems",
-    description: "Automated ordering flows for small businesses",
-    icon: ShoppingCart,
-    earning: "R300-R500",
-    difficulty: "Medium",
-    links: [
-      { name: "WhatsApp Business API", url: "https://developers.facebook.com/docs/whatsapp", description: "Advanced features guide" },
-      { name: "Zapier", url: "https://zapier.com", description: "Automation workflows" },
-      { name: "Google Forms", url: "https://forms.google.com", description: "Create order forms" },
-      { name: "Local Business Directories", url: "https://google.com/business", description: "Find potential clients" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Manual Setup",
-        description: "Custom auto-reply systems for individual brands",
-        tasks: ["Master WhatsApp flows", "Create setup templates", "Find small brands", "Document best practices"],
-        timeframe: "2 weeks",
-        investment: "R0-R100",
-        expectedEarning: "R3000-R6000/month"
-      },
-      {
-        phase: 2,
-        title: "Feature Packages",
-        description: "Enhanced packages with additional features",
-        tasks: ["Add advanced features", "Create tier pricing", "Include training materials", "Upsell existing clients"],
-        timeframe: "2-3 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R6000-R15000/month"
-      },
-      {
-        phase: 3,
-        title: "Automated Builder",
-        description: "Form-based automation for quick system builds",
-        tasks: ["Create form interface", "Automate system generation", "Self-service model", "Scale operations"],
-        timeframe: "1-2 months",
-        investment: "R1000-R2500",
-        expectedEarning: "R15000-R35000/month"
-      }
-    ]
-  },
-  {
-    id: 10,
-    title: "Pricing Flyers",
-    description: "Professional pricing flyers for small businesses",
-    icon: FileText,
-    earning: "R150-R400",
-    difficulty: "Easy",
-    links: [
-      { name: "Canva", url: "https://canva.com", description: "Design professional flyers" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "Study competitor designs" },
-      { name: "99designs", url: "https://99designs.com", description: "Design inspiration" },
-      { name: "Local Facebook Groups", url: "https://facebook.com/groups", description: "Find local businesses" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Design",
-        description: "Individual flyer design using Canva",
-        tasks: ["Master Canva design", "Create design templates", "Find local businesses", "Build portfolio"],
-        timeframe: "1 week",
-        investment: "R100-R200",
-        expectedEarning: "R2000-R5000/month"
-      },
-      {
-        phase: 2,
-        title: "Template Shop",
-        description: "Sell ready-made flyer templates",
-        tasks: ["Create template collection", "Set up template shop", "Add customization options", "Market templates"],
-        timeframe: "2-3 weeks",
-        investment: "R400-R800",
-        expectedEarning: "R5000-R12000/month"
-      },
-      {
-        phase: 3,
-        title: "Team Fulfillment",
-        description: "Hire designers and scale operations",
-        tasks: ["Recruit designers", "Create quality standards", "Automate order flow", "Focus on growth"],
-        timeframe: "1 month",
-        investment: "R1000-R2000",
-        expectedEarning: "R12000-R30000/month"
-      }
-    ]
-  },
-  {
-    id: 11,
-    title: "Google Forms Setup",
-    description: "Professional form creation for bookings and orders",
-    icon: Calendar,
-    earning: "R150-R300",
-    difficulty: "Easy",
-    links: [
-      { name: "Google Forms", url: "https://forms.google.com", description: "Free form builder" },
-      { name: "Calendly", url: "https://calendly.com", description: "Booking system inspiration" },
-      { name: "Typeform", url: "https://typeform.com", description: "Advanced form features" },
-      { name: "Local Service Providers", url: "https://google.com/maps", description: "Find potential clients" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Forms",
-        description: "Individual Google Forms for appointments/orders",
-        tasks: ["Master Google Forms", "Create form templates", "Add automation features", "Find service businesses"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1500-R4000/month"
-      },
-      {
-        phase: 2,
-        title: "Template Library",
-        description: "Pre-made form templates for different industries",
-        tasks: ["Create industry templates", "Add advanced features", "Package with instructions", "Market template library"],
-        timeframe: "2 weeks",
-        investment: "R200-R500",
-        expectedEarning: "R4000-R10000/month"
-      },
-      {
-        phase: 3,
-        title: "Automated Creation",
-        description: "Custom site or Notion for automated form building",
-        tasks: ["Build form creation tool", "Automate form generation", "Add payment processing", "Scale platform"],
-        timeframe: "1 month",
-        investment: "R800-R2000",
-        expectedEarning: "R10000-R25000/month"
-      }
-    ]
-  },
-  {
-    id: 12,
-    title: "Digital Portfolios",
-    description: "Professional online portfolios for students",
-    icon: User,
-    earning: "R100-R200",
-    difficulty: "Easy",
-    links: [
-      { name: "Notion", url: "https://notion.so", description: "Portfolio templates" },
-      { name: "GitHub Pages", url: "https://pages.github.com", description: "Free website hosting" },
-      { name: "LinkedIn", url: "https://linkedin.com", description: "Professional networking" },
-      { name: "Student WhatsApp Groups", url: "https://chat.whatsapp.com", description: "Find fellow students" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Portfolios",
-        description: "Individual portfolios in Notion/Google Docs",
-        tasks: ["Master Notion/Docs", "Create portfolio templates", "Find fellow students", "Build referral system"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1000-R3000/month"
-      },
-      {
-        phase: 2,
-        title: "Upgrade Templates",
-        description: "Premium templates and additional features",
-        tasks: ["Create premium templates", "Add interactive features", "Package with tutorials", "Upsell existing clients"],
-        timeframe: "2 weeks",
-        investment: "R200-R400",
-        expectedEarning: "R3000-R8000/month"
-      },
-      {
-        phase: 3,
-        title: "Automated Delivery",
-        description: "Tutorial videos and automated template delivery",
-        tasks: ["Create video tutorials", "Automate template delivery", "Build online course", "Scale through education"],
-        timeframe: "3 weeks",
-        investment: "R500-R1000",
-        expectedEarning: "R8000-R20000/month"
-      }
-    ]
-  },
-  {
-    id: 13,
-    title: "Homework to PDF",
-    description: "Professional formatting of study materials",
-    icon: FileText,
-    earning: "R200-R300",
-    difficulty: "Easy",
-    links: [
-      { name: "Google Docs", url: "https://docs.google.com", description: "Document formatting" },
-      { name: "Canva", url: "https://canva.com", description: "Professional PDF design" },
-      { name: "Student Facebook Groups", url: "https://facebook.com", description: "Find student clients" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Manual Formatting",
-        description: "Convert notes and photos to formatted PDFs",
-        tasks: ["Master PDF formatting", "Create style templates", "Find student clients", "Build quality process"],
-        timeframe: "1 week",
-        investment: "R0-R100",
-        expectedEarning: "R2000-R4000/month"
-      },
-      {
-        phase: 2,
-        title: "Study Bundles",
-        description: "Past papers, visual summaries, and bundle packages",
-        tasks: ["Create study bundles", "Add visual elements", "Package multiple subjects", "Market to schools"],
-        timeframe: "2-3 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R4000-R10000/month"
-      },
-      {
-        phase: 3,
-        title: "Outsourced Typing",
-        description: "Hire typists and focus on business growth",
-        tasks: ["Recruit typist team", "Create quality standards", "Automate client flow", "Focus on scaling"],
-        timeframe: "1 month",
-        investment: "R1000-R2000",
-        expectedEarning: "R10000-R25000/month"
-      }
-    ]
-  },
-  {
-    id: 14,
-    title: "Link-in-Bio Pages",
-    description: "Professional bio pages for WhatsApp sellers",
-    icon: Link,
-    earning: "R200-R350",
-    difficulty: "Easy",
-    links: [
-      { name: "Carrd", url: "https://carrd.co", description: "Simple website builder" },
-      { name: "Linktree", url: "https://linktr.ee", description: "Study competitor features" },
-      { name: "Notion", url: "https://notion.so", description: "Create bio pages" },
-      { name: "WhatsApp Business Groups", url: "https://chat.whatsapp.com", description: "Find sellers" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Pages",
-        description: "Individual bio pages using Carrd/Notion",
-        tasks: ["Master Carrd/Notion", "Create page templates", "Find WhatsApp sellers", "Build showcase portfolio"],
-        timeframe: "1 week",
-        investment: "R100-R200",
-        expectedEarning: "R2000-R5000/month"
-      },
-      {
-        phase: 2,
-        title: "Design Upgrades",
-        description: "Premium designs and enhanced features",
-        tasks: ["Create premium designs", "Add advanced features", "Upsell existing clients", "Market premium tier"],
-        timeframe: "2 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R5000-R12000/month"
-      },
-      {
-        phase: 3,
-        title: "Page Builder Platform",
-        description: "Self-service page builder dashboard",
-        tasks: ["Build page builder tool", "Automate page creation", "Add payment processing", "Scale platform"],
-        timeframe: "1-2 months",
-        investment: "R1000-R3000",
-        expectedEarning: "R12000-R30000/month"
-      }
-    ]
-  },
-  {
-    id: 15,
-    title: "Tutor Finder Middleman",
-    description: "Connect students with tutors for commission",
-    icon: Users,
-    earning: "R50-R150",
-    difficulty: "Easy",
-    links: [
-      { name: "Google Forms", url: "https://forms.google.com", description: "Create tutor/student forms" },
-      { name: "WhatsApp Groups", url: "https://chat.whatsapp.com", description: "Find tutors and students" },
-      { name: "Facebook Groups", url: "https://facebook.com/groups", description: "Local education communities" },
-      { name: "University Notice Boards", url: "#", description: "Post flyers on campus" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Manual Matching",
-        description: "Connect students to tutors manually",
-        tasks: ["Build tutor database", "Create student intake", "Manual matching process", "Collect referral fees"],
-        timeframe: "1 week",
-        investment: "R0",
-        expectedEarning: "R1000-R3000/month"
-      },
-      {
-        phase: 2,
-        title: "Tutor Network",
-        description: "Build comprehensive tutor list and system",
-        tasks: ["Expand tutor network", "Create rating system", "Add subject specializations", "Improve matching"],
-        timeframe: "2-3 weeks",
-        investment: "R200-R400",
-        expectedEarning: "R3000-R8000/month"
-      },
-      {
-        phase: 3,
-        title: "Automated Booking",
-        description: "Google Forms system for automated matching",
-        tasks: ["Create automated forms", "Build booking system", "Add payment processing", "Scale operations"],
-        timeframe: "1 month",
-        investment: "R500-R1000",
-        expectedEarning: "R8000-R20000/month"
-      }
-    ]
-  },
-  {
-    id: 16,
-    title: "AI Quote Packs",
-    description: "Motivational quotes and affirmations for resale",
-    icon: Heart,
-    earning: "R150-R300",
-    difficulty: "Easy",
-    links: [
-      { name: "ChatGPT", url: "https://chat.openai.com", description: "Generate motivational quotes" },
-      { name: "Canva", url: "https://canva.com", description: "Design quote wallpapers" },
-      { name: "Etsy", url: "https://etsy.com", description: "Sell digital downloads" },
-      { name: "Telegram", url: "https://telegram.org", description: "Create quote channels" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Quote Packs",
-        description: "AI-generated quote wallpapers and PDFs",
-        tasks: ["Generate quote collections", "Create wallpaper designs", "Package for resale", "Find initial customers"],
-        timeframe: "1 week",
-        investment: "R100-R200",
-        expectedEarning: "R1500-R4000/month"
-      },
-      {
-        phase: 2,
-        title: "Motivational Brand",
-        description: "Build branded motivational content business",
-        tasks: ["Create brand identity", "Expand content types", "Build social presence", "Develop loyal following"],
-        timeframe: "2-3 weeks",
-        investment: "R400-R800",
-        expectedEarning: "R4000-R10000/month"
-      },
-      {
-        phase: 3,
-        title: "Marketplace Scaling",
-        description: "Sell on Etsy, Telegram, and multiple platforms",
-        tasks: ["Set up marketplace stores", "Create Telegram channels", "Automate content creation", "Scale distribution"],
-        timeframe: "1 month",
-        investment: "R800-R1500",
-        expectedEarning: "R10000-R25000/month"
-      }
-    ]
-  },
-  {
-    id: 17,
-    title: "AI Hustle Generator",
-    description: "Personalized hustle plans using ChatGPT",
-    icon: Lightbulb,
-    earning: "R100-R200",
-    difficulty: "Medium",
-    links: [
-      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI planning tool" },
-      { name: "Typeform", url: "https://typeform.com", description: "Create questionnaires" },
-      { name: "Google Forms", url: "https://forms.google.com", description: "Free form builder" },
-      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" }
-    ],
-    phases: [
-      {
-        phase: 1,
-        title: "Custom Plans",
-        description: "Personalized hustle plans via questionnaire",
-        tasks: ["Create intake questionnaire", "Develop ChatGPT prompts", "Test plan quality", "Find first clients"],
-        timeframe: "1-2 weeks",
-        investment: "R0-R100",
-        expectedEarning: "R1500-R3000/month"
-      },
-      {
-        phase: 2,
-        title: "Premium Bundles",
-        description: "Enhanced plans with additional resources",
-        tasks: ["Create premium tiers", "Add resource bundles", "Include follow-up support", "Market premium options"],
-        timeframe: "2 weeks",
-        investment: "R300-R600",
-        expectedEarning: "R3000-R8000/month"
-      },
-      {
-        phase: 3,
-        title: "Automated Platform",
-        description: "Website or WhatsApp chatbot for automation",
-        tasks: ["Build automated platform", "Integrate payment system", "Create chatbot flow", "Scale marketing"],
-        timeframe: "1-2 months",
-        investment: "R1000-R2500",
-        expectedEarning: "R8000-R25000/month"
-      }
+      { name: "Udemy", url: "https://www.udemy.com", description: "Create and sell courses" },
+      { name: "Teachable", url: "https://teachable.com", description: "Build your course platform" },
+      { name: "OBS Studio", url: "https://obsproject.com", description: "Free screen recording" },
+      { name: "Canva", url: "https://www.canva.com", description: "Create course thumbnails and graphics" }
     ]
   }
 ];
 
 const Index = () => {
-  const [selectedHustle, setSelectedHustle] = useState<number | null>(null);
-  const [selectedPhase, setSelectedPhase] = useState<number>(1);
-
-  const selectedHustleData = selectedHustle ? hustleIdeas.find(h => h.id === selectedHustle) : null;
+  const [selectedHustle, setSelectedHustle] = useState<typeof hustles[0] | null>(null);
+  const [selectedPhase, setSelectedPhase] = useState(1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Header */}
-      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-purple-100 dark:border-gray-700 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-2 rounded-lg">
-                <TrendingUp className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  PJ7 Hustle
-                </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Your step-by-step guide to income generation</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                17 Proven Strategies
-              </Badge>
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-background transition-colors">
       <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          {selectedHustle && (
+            <Button 
+              variant="outline" 
+              onClick={() => setSelectedHustle(null)}
+              className="flex items-center space-x-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>Back to Hustles</span>
+            </Button>
+          )}
+          
+          <div className="flex-1 text-center">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+              PJ7 Hustle Dashboard
+            </h1>
+            <p className="text-muted-foreground text-lg">
+              6 Proven Side Hustles to Start Making Money This Week
+            </p>
+          </div>
+          
+          <ThemeToggle />
+        </div>
+
         {!selectedHustle ? (
-          <div className="space-y-8">
-            {/* Overview Section */}
-            <div className="text-center space-y-4 mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-                Transform Ideas Into Income
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Each hustle follows the same proven 3-phase approach: Start lean (MVP), build systems, then automate for passive income.
-              </p>
+          <>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-green-800 dark:text-green-300">Total Earning Potential</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-900 dark:text-green-100">$500-15K/mo</div>
+                  <p className="text-xs text-green-600 dark:text-green-400">Per hustle at scale</p>
+                </CardContent>
+              </Card>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
-                <Card className="border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/20">
-                  <CardHeader className="text-center pb-3">
-                    <Target className="h-8 w-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-purple-900 dark:text-purple-300">Phase 1: MVP</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-purple-700 dark:text-purple-300">Start with one client, one product. Validate and learn.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/20">
-                  <CardHeader className="text-center pb-3">
-                    <Zap className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-blue-900 dark:text-blue-300">Phase 2: Scale</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-blue-700 dark:text-blue-300">Build repeatable systems and standardized processes.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/20">
-                  <CardHeader className="text-center pb-3">
-                    <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
-                    <CardTitle className="text-lg text-green-900 dark:text-green-300">Phase 3: Automate</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-green-700 dark:text-green-300">Semi-automated income with minimal manual effort.</p>
-                  </CardContent>
-                </Card>
-              </div>
+              <Card className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-blue-800 dark:text-blue-300">Start-up Cost</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">$15-400</div>
+                  <p className="text-xs text-blue-600 dark:text-blue-400">Low barrier to entry</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200 dark:border-purple-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-purple-800 dark:text-purple-300">Time to Launch</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">1-6 weeks</div>
+                  <p className="text-xs text-purple-600 dark:text-purple-400">Depending on hustle</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border-orange-200 dark:border-orange-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-orange-800 dark:text-orange-300">Success Rate</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-orange-900 dark:text-orange-100">85%+</div>
+                  <p className="text-xs text-orange-600 dark:text-orange-400">With consistent effort</p>
+                </CardContent>
+              </Card>
             </div>
 
-            {/* Hustle Ideas Grid */}
+            {/* Hustles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {hustleIdeas.map((hustle, index) => (
+              {hustles.map((hustle) => (
                 <HustleCard
                   key={hustle.id}
-                  hustle={{...hustle, number: index + 1}}
-                  onClick={() => setSelectedHustle(hustle.id)}
+                  hustle={hustle}
+                  onClick={() => setSelectedHustle(hustle)}
                 />
               ))}
             </div>
-          </div>
+          </>
         ) : (
-          <div className="space-y-6">
-            {/* Back Button */}
-            <Button
-              variant="outline"
-              onClick={() => setSelectedHustle(null)}
-              className="mb-4"
-            >
-              ← Back to All Hustles
-            </Button>
-
-            {/* Hustle Details */}
-            {selectedHustleData && (
-              <PhaseDetails
-                hustle={selectedHustleData}
-                selectedPhase={selectedPhase}
-                onPhaseChange={setSelectedPhase}
-              />
-            )}
-          </div>
+          <PhaseDetails
+            hustle={selectedHustle}
+            selectedPhase={selectedPhase}
+            onPhaseChange={setSelectedPhase}
+          />
         )}
       </div>
     </div>
