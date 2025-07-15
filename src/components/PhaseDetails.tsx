@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle, Clock, DollarSign, TrendingUp, Target, Calendar } from "lucide-react";
+import { CheckCircle, Clock, DollarSign, TrendingUp, Target, Calendar, ExternalLink, Rocket } from "lucide-react";
 
 interface Phase {
   phase: number;
@@ -23,6 +23,11 @@ interface Hustle {
   earning: string;
   difficulty: string;
   phases: Phase[];
+  links?: {
+    name: string;
+    url: string;
+    description: string;
+  }[];
 }
 
 interface PhaseDetailsProps {
@@ -55,22 +60,22 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
   return (
     <div className="space-y-6">
       {/* Hustle Header */}
-      <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50">
+      <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50 dark:border-purple-800 dark:from-purple-900/20 dark:to-blue-900/20">
         <CardHeader>
           <div className="flex items-center space-x-4">
             <div className="p-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl">
               <Icon className="h-8 w-8 text-white" />
             </div>
             <div className="flex-1">
-              <CardTitle className="text-2xl text-gray-900">{hustle.title}</CardTitle>
-              <CardDescription className="text-lg text-gray-600 mt-1">
+              <CardTitle className="text-2xl text-gray-900 dark:text-white">{hustle.title}</CardTitle>
+              <CardDescription className="text-lg text-gray-600 dark:text-gray-300 mt-1">
                 {hustle.description}
               </CardDescription>
               <div className="flex space-x-4 mt-3">
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                   {hustle.earning} per sale
                 </Badge>
-                <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                   {hustle.difficulty} difficulty
                 </Badge>
               </div>
@@ -78,6 +83,44 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
           </div>
         </CardHeader>
       </Card>
+
+      {/* Quick Start Links */}
+      {hustle.links && hustle.links.length > 0 && (
+        <Card className="border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/20">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center space-x-2 text-orange-900 dark:text-orange-300">
+              <Rocket className="h-5 w-5" />
+              <span>Quick Start Links - Get Started Now!</span>
+            </CardTitle>
+            <CardDescription className="text-orange-700 dark:text-orange-400">
+              Click these links to start implementing this hustle immediately
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              {hustle.links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 p-3 bg-white dark:bg-gray-800 rounded-lg border border-orange-200 dark:border-orange-700 hover:border-orange-300 dark:hover:border-orange-600 hover:shadow-md transition-all group"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="font-medium text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400">
+                        {link.name}
+                      </span>
+                      <ExternalLink className="h-3 w-3 text-orange-600 dark:text-orange-400" />
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{link.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Phase Progress */}
       <Card>
@@ -95,17 +138,17 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
                   onClick={() => onPhaseChange(phase.phase)}
                   className={`p-4 rounded-lg border-2 text-left transition-all ${
                     selectedPhase === phase.phase
-                      ? 'border-purple-500 bg-purple-50'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-purple-500 bg-purple-50 dark:border-purple-400 dark:bg-purple-900/20'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   <div className="flex items-center space-x-2 mb-2">
                     <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${getPhaseColor(phase.phase)} flex items-center justify-center text-white font-bold text-sm`}>
                       {phase.phase}
                     </div>
-                    <span className="font-semibold">{phase.title}</span>
+                    <span className="font-semibold dark:text-white">{phase.title}</span>
                   </div>
-                  <p className="text-sm text-gray-600">{phase.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{phase.description}</p>
                 </button>
               ))}
             </div>
@@ -124,8 +167,8 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
                   {currentPhase.phase}
                 </div>
                 <div>
-                  <CardTitle className="text-xl">{currentPhase.title}</CardTitle>
-                  <CardDescription>{currentPhase.description}</CardDescription>
+                  <CardTitle className="text-xl dark:text-white">{currentPhase.title}</CardTitle>
+                  <CardDescription className="dark:text-gray-400">{currentPhase.description}</CardDescription>
                 </div>
               </div>
             </CardHeader>
@@ -134,15 +177,15 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
                 <div>
                   <h4 className="font-semibold mb-3 flex items-center space-x-2">
                     <CheckCircle className="h-5 w-5 text-green-600" />
-                    <span>Action Steps</span>
+                    <span className="dark:text-white">Action Steps</span>
                   </h4>
                   <ul className="space-y-2">
                     {currentPhase.tasks.map((task, index) => (
                       <li key={index} className="flex items-start space-x-3">
-                        <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center mt-0.5">
-                          <span className="text-xs font-medium text-purple-600">{index + 1}</span>
+                        <div className="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mt-0.5">
+                          <span className="text-xs font-medium text-purple-600 dark:text-purple-300">{index + 1}</span>
                         </div>
-                        <span className="text-gray-700">{task}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{task}</span>
                       </li>
                     ))}
                   </ul>
@@ -157,12 +200,12 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
                   <Clock className="h-5 w-5 text-blue-600" />
-                  <span>Timeline</span>
+                  <span className="dark:text-white">Timeline</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold text-blue-600">{currentPhase.timeframe}</p>
-                <p className="text-sm text-gray-600">Expected completion time</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Expected completion time</p>
               </CardContent>
             </Card>
 
@@ -170,12 +213,12 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
                   <Target className="h-5 w-5 text-purple-600" />
-                  <span>Investment</span>
+                  <span className="dark:text-white">Investment</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold text-purple-600">{currentPhase.investment}</p>
-                <p className="text-sm text-gray-600">Initial capital needed</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Initial capital needed</p>
               </CardContent>
             </Card>
 
@@ -183,12 +226,12 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
                   <DollarSign className="h-5 w-5 text-green-600" />
-                  <span>Expected Earning</span>
+                  <span className="dark:text-white">Expected Earning</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold text-green-600">{currentPhase.expectedEarning}</p>
-                <p className="text-sm text-gray-600">Monthly income potential</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Monthly income potential</p>
               </CardContent>
             </Card>
           </div>
@@ -198,27 +241,27 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
       {/* Phase Comparison */}
       <Card>
         <CardHeader>
-          <CardTitle>Phase Comparison Overview</CardTitle>
-          <CardDescription>See how each phase builds upon the previous one</CardDescription>
+          <CardTitle className="dark:text-white">Phase Comparison Overview</CardTitle>
+          <CardDescription className="dark:text-gray-400">See how each phase builds upon the previous one</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b">
-                  <th className="text-left p-3 font-semibold">Phase</th>
-                  <th className="text-left p-3 font-semibold">Focus</th>
-                  <th className="text-left p-3 font-semibold">Timeline</th>
-                  <th className="text-left p-3 font-semibold">Investment</th>
-                  <th className="text-left p-3 font-semibold">Expected Earning</th>
+                <tr className="border-b dark:border-gray-700">
+                  <th className="text-left p-3 font-semibold dark:text-white">Phase</th>
+                  <th className="text-left p-3 font-semibold dark:text-white">Focus</th>
+                  <th className="text-left p-3 font-semibold dark:text-white">Timeline</th>
+                  <th className="text-left p-3 font-semibold dark:text-white">Investment</th>
+                  <th className="text-left p-3 font-semibold dark:text-white">Expected Earning</th>
                 </tr>
               </thead>
               <tbody>
                 {hustle.phases.map((phase) => (
                   <tr
                     key={phase.phase}
-                    className={`border-b hover:bg-gray-50 ${
-                      selectedPhase === phase.phase ? 'bg-purple-50' : ''
+                    className={`border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 ${
+                      selectedPhase === phase.phase ? 'bg-purple-50 dark:bg-purple-900/20' : ''
                     }`}
                   >
                     <td className="p-3">
@@ -226,12 +269,12 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
                         <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${getPhaseColor(phase.phase)} flex items-center justify-center text-white font-bold text-sm`}>
                           {phase.phase}
                         </div>
-                        <span className="font-medium">{phase.title}</span>
+                        <span className="font-medium dark:text-white">{phase.title}</span>
                       </div>
                     </td>
-                    <td className="p-3 text-gray-600">{phase.description}</td>
-                    <td className="p-3 text-gray-600">{phase.timeframe}</td>
-                    <td className="p-3 text-gray-600">{phase.investment}</td>
+                    <td className="p-3 text-gray-600 dark:text-gray-400">{phase.description}</td>
+                    <td className="p-3 text-gray-600 dark:text-gray-400">{phase.timeframe}</td>
+                    <td className="p-3 text-gray-600 dark:text-gray-400">{phase.investment}</td>
                     <td className="p-3 font-semibold text-green-600">{phase.expectedEarning}</td>
                   </tr>
                 ))}

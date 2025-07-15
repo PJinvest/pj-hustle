@@ -35,6 +35,12 @@ const hustleIdeas = [
     icon: FileText,
     earning: "R100-R250",
     difficulty: "Easy",
+    links: [
+      { name: "Gumroad", url: "https://gumroad.com", description: "Sell digital products easily" },
+      { name: "Canva", url: "https://canva.com", description: "Design professional PDFs" },
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "Generate AI prompts" },
+      { name: "Notion", url: "https://notion.so", description: "Create organized prompt collections" }
+    ],
     phases: [
       {
         phase: 1,
@@ -72,6 +78,11 @@ const hustleIdeas = [
     icon: MessageSquare,
     earning: "R150-R300",
     difficulty: "Easy",
+    links: [
+      { name: "WhatsApp Business", url: "https://business.whatsapp.com", description: "Download WhatsApp Business app" },
+      { name: "Meta Business", url: "https://business.facebook.com/tools/whatsapp", description: "WhatsApp Business features guide" },
+      { name: "Local Facebook Groups", url: "https://facebook.com/groups", description: "Find local business groups" }
+    ],
     phases: [
       {
         phase: 1,
@@ -109,6 +120,12 @@ const hustleIdeas = [
     icon: Languages,
     earning: "R50-R200",
     difficulty: "Easy",
+    links: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI translation tool" },
+      { name: "Canva", url: "https://canva.com", description: "Design translated flyers" },
+      { name: "Google Translate", url: "https://translate.google.com", description: "Quick translation reference" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "Study competitor pricing" }
+    ],
     phases: [
       {
         phase: 1,
@@ -146,6 +163,12 @@ const hustleIdeas = [
     icon: Video,
     earning: "R200-R400",
     difficulty: "Medium",
+    links: [
+      { name: "ElevenLabs", url: "https://elevenlabs.io", description: "AI voice generation" },
+      { name: "LinkedIn", url: "https://linkedin.com", description: "Find job seekers" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" },
+      { name: "Upwork", url: "https://upwork.com", description: "Find freelance clients" }
+    ],
     phases: [
       {
         phase: 1,
@@ -183,6 +206,12 @@ const hustleIdeas = [
     icon: BookOpen,
     earning: "R150-R300",
     difficulty: "Medium",
+    links: [
+      { name: "Gumroad", url: "https://gumroad.com", description: "Sell digital guides" },
+      { name: "Etsy", url: "https://etsy.com", description: "Digital marketplace" },
+      { name: "Canva", url: "https://canva.com", description: "Design professional guides" },
+      { name: "Telegram", url: "https://telegram.org", description: "Create sales channels" }
+    ],
     phases: [
       {
         phase: 1,
@@ -220,6 +249,12 @@ const hustleIdeas = [
     icon: FileText,
     earning: "R150-R300",
     difficulty: "Medium",
+    links: [
+      { name: "Otter.ai", url: "https://otter.ai", description: "AI transcription service" },
+      { name: "Whisper by OpenAI", url: "https://openai.com/research/whisper", description: "Free transcription tool" },
+      { name: "Canva", url: "https://canva.com", description: "Format study materials" },
+      { name: "Student Facebook Groups", url: "https://facebook.com", description: "Find student clients" }
+    ],
     phases: [
       {
         phase: 1,
@@ -257,6 +292,12 @@ const hustleIdeas = [
     icon: Package,
     earning: "R300-R500",
     difficulty: "Medium",
+    links: [
+      { name: "WhatsApp Business", url: "https://business.whatsapp.com", description: "Business features guide" },
+      { name: "Canva", url: "https://canva.com", description: "Design templates" },
+      { name: "Telegram", url: "https://telegram.org", description: "Find WhatsApp sellers" },
+      { name: "Facebook Marketplace", url: "https://facebook.com/marketplace", description: "Connect with local sellers" }
+    ],
     phases: [
       {
         phase: 1,
@@ -294,6 +335,12 @@ const hustleIdeas = [
     icon: PenTool,
     earning: "R20-R50",
     difficulty: "Easy",
+    links: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI writing tool" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" },
+      { name: "WhatsApp Business Groups", url: "https://chat.whatsapp.com", description: "Find seller groups" },
+      { name: "Facebook Groups", url: "https://facebook.com/groups", description: "Local business communities" }
+    ],
     phases: [
       {
         phase: 1,
@@ -331,6 +378,12 @@ const hustleIdeas = [
     icon: ShoppingCart,
     earning: "R300-R500",
     difficulty: "Medium",
+    links: [
+      { name: "WhatsApp Business API", url: "https://developers.facebook.com/docs/whatsapp", description: "Advanced features guide" },
+      { name: "Zapier", url: "https://zapier.com", description: "Automation workflows" },
+      { name: "Google Forms", url: "https://forms.google.com", description: "Create order forms" },
+      { name: "Local Business Directories", url: "https://google.com/business", description: "Find potential clients" }
+    ],
     phases: [
       {
         phase: 1,
@@ -368,6 +421,12 @@ const hustleIdeas = [
     icon: FileText,
     earning: "R150-R400",
     difficulty: "Easy",
+    links: [
+      { name: "Canva", url: "https://canva.com", description: "Design professional flyers" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "Study competitor designs" },
+      { name: "99designs", url: "https://99designs.com", description: "Design inspiration" },
+      { name: "Local Facebook Groups", url: "https://facebook.com/groups", description: "Find local businesses" }
+    ],
     phases: [
       {
         phase: 1,
@@ -405,6 +464,12 @@ const hustleIdeas = [
     icon: Calendar,
     earning: "R150-R300",
     difficulty: "Easy",
+    links: [
+      { name: "Google Forms", url: "https://forms.google.com", description: "Free form builder" },
+      { name: "Calendly", url: "https://calendly.com", description: "Booking system inspiration" },
+      { name: "Typeform", url: "https://typeform.com", description: "Advanced form features" },
+      { name: "Local Service Providers", url: "https://google.com/maps", description: "Find potential clients" }
+    ],
     phases: [
       {
         phase: 1,
@@ -442,6 +507,12 @@ const hustleIdeas = [
     icon: User,
     earning: "R100-R200",
     difficulty: "Easy",
+    links: [
+      { name: "Notion", url: "https://notion.so", description: "Portfolio templates" },
+      { name: "GitHub Pages", url: "https://pages.github.com", description: "Free website hosting" },
+      { name: "LinkedIn", url: "https://linkedin.com", description: "Professional networking" },
+      { name: "Student WhatsApp Groups", url: "https://chat.whatsapp.com", description: "Find fellow students" }
+    ],
     phases: [
       {
         phase: 1,
@@ -479,6 +550,12 @@ const hustleIdeas = [
     icon: FileText,
     earning: "R200-R300",
     difficulty: "Easy",
+    links: [
+      { name: "Google Docs", url: "https://docs.google.com", description: "Document formatting" },
+      { name: "Canva", url: "https://canva.com", description: "Professional PDF design" },
+      { name: "Student Facebook Groups", url: "https://facebook.com", description: "Find student clients" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" }
+    ],
     phases: [
       {
         phase: 1,
@@ -516,6 +593,12 @@ const hustleIdeas = [
     icon: Link,
     earning: "R200-R350",
     difficulty: "Easy",
+    links: [
+      { name: "Carrd", url: "https://carrd.co", description: "Simple website builder" },
+      { name: "Linktree", url: "https://linktr.ee", description: "Study competitor features" },
+      { name: "Notion", url: "https://notion.so", description: "Create bio pages" },
+      { name: "WhatsApp Business Groups", url: "https://chat.whatsapp.com", description: "Find sellers" }
+    ],
     phases: [
       {
         phase: 1,
@@ -553,6 +636,12 @@ const hustleIdeas = [
     icon: Users,
     earning: "R50-R150",
     difficulty: "Easy",
+    links: [
+      { name: "Google Forms", url: "https://forms.google.com", description: "Create tutor/student forms" },
+      { name: "WhatsApp Groups", url: "https://chat.whatsapp.com", description: "Find tutors and students" },
+      { name: "Facebook Groups", url: "https://facebook.com/groups", description: "Local education communities" },
+      { name: "University Notice Boards", url: "#", description: "Post flyers on campus" }
+    ],
     phases: [
       {
         phase: 1,
@@ -590,6 +679,12 @@ const hustleIdeas = [
     icon: Heart,
     earning: "R150-R300",
     difficulty: "Easy",
+    links: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "Generate motivational quotes" },
+      { name: "Canva", url: "https://canva.com", description: "Design quote wallpapers" },
+      { name: "Etsy", url: "https://etsy.com", description: "Sell digital downloads" },
+      { name: "Telegram", url: "https://telegram.org", description: "Create quote channels" }
+    ],
     phases: [
       {
         phase: 1,
@@ -627,6 +722,12 @@ const hustleIdeas = [
     icon: Lightbulb,
     earning: "R100-R200",
     difficulty: "Medium",
+    links: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "AI planning tool" },
+      { name: "Typeform", url: "https://typeform.com", description: "Create questionnaires" },
+      { name: "Google Forms", url: "https://forms.google.com", description: "Free form builder" },
+      { name: "Fiverr", url: "https://fiverr.com", description: "List your services" }
+    ],
     phases: [
       {
         phase: 1,

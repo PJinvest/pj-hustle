@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ExternalLink } from "lucide-react";
 
 interface HustleCardProps {
   hustle: {
@@ -13,6 +13,11 @@ interface HustleCardProps {
     earning: string;
     difficulty: string;
     number?: number;
+    links?: {
+      name: string;
+      url: string;
+      description: string;
+    }[];
   };
   onClick: () => void;
 }
@@ -70,6 +75,26 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
             View Details →
           </Button>
         </div>
+        {hustle.links && hustle.links.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+            <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Quick Start Links:</p>
+            <div className="flex flex-wrap gap-1">
+              {hustle.links.slice(0, 2).map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center space-x-1 text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                >
+                  <span>{link.name}</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
