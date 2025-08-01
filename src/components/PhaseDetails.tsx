@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { CheckCircle, Clock, DollarSign, TrendingUp, Target, Calendar, ExternalLink, Rocket } from "lucide-react";
 
 interface Phase {
@@ -34,9 +35,10 @@ interface PhaseDetailsProps {
   hustle: Hustle;
   selectedPhase: number;
   onPhaseChange: (phase: number) => void;
+  onBack: () => void;
 }
 
-export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDetailsProps) => {
+export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange, onBack }: PhaseDetailsProps) => {
   const Icon = hustle.icon;
   const currentPhase = hustle.phases.find(p => p.phase === selectedPhase);
   
@@ -58,7 +60,21 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header with Back Button */}
+        <div className="flex items-center justify-between mb-8">
+          <button 
+            onClick={onBack}
+            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Back to Global Hustle</span>
+          </button>
+          <ThemeToggle />
+        </div>
       {/* Hustle Header */}
       <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50 dark:border-purple-800 dark:from-purple-900/20 dark:to-blue-900/20">
         <CardHeader>
@@ -283,6 +299,7 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange }: PhaseDeta
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 };

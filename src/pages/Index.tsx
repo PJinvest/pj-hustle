@@ -16,6 +16,7 @@ const Index = () => {
           hustle={hustle} 
           selectedPhase={selectedPhase}
           onPhaseChange={setSelectedPhase}
+          onBack={() => setSelectedHustle(null)}
         />
       );
     }
