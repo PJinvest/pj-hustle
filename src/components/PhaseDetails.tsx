@@ -102,9 +102,9 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange, onBack }: P
                   
                   <div className="flex-1 space-y-4">
                     <div>
-                      <CardTitle className="text-4xl font-bold gradient-text mb-2 leading-tight">
-                        {hustle.title}
-                      </CardTitle>
+                    <CardTitle className="text-4xl font-bold text-foreground mb-2 leading-tight">
+                      {hustle.title}
+                    </CardTitle>
                       <CardDescription className="text-xl text-muted-foreground leading-relaxed">
                         {hustle.description}
                       </CardDescription>
@@ -140,7 +140,7 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange, onBack }: P
                     <div className="p-2 bg-gradient-secondary rounded-lg animate-pulse-glow">
                       <Rocket className="h-6 w-6 text-secondary-foreground" />
                     </div>
-                    <CardTitle className="text-2xl font-bold gradient-text">
+                    <CardTitle className="text-2xl font-bold text-foreground">
                       🚀 Quick Start Launch Pad
                     </CardTitle>
                   </div>

@@ -81,7 +81,7 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
           </Badge>
         </div>
 
-        <CardTitle className="text-xl font-bold text-foreground group-hover:gradient-text transition-all duration-300 leading-tight">
+        <CardTitle className="text-xl font-bold text-foreground leading-tight">
           {hustle.title}
         </CardTitle>
         
@@ -94,7 +94,7 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="space-y-1">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Earning Potential</p>
-            <p className="text-lg font-bold gradient-text">{hustle.earning}</p>
+            <p className="text-lg font-bold text-success">{hustle.earning}</p>
           </div>
           
           <Button 

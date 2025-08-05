@@ -48,7 +48,7 @@ const Index = () => {
                   <span>25 Proven Strategies</span>
                 </div>
                 
-                <h1 className="text-7xl font-bold gradient-text mb-6 leading-tight">
+                <h1 className="text-7xl font-bold text-foreground mb-6 leading-tight">
                   Global Hustle
                 </h1>
                 
