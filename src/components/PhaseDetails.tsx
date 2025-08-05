@@ -60,85 +60,129 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange, onBack }: P
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header with Back Button */}
-        <div className="flex items-center justify-between mb-8">
-          <button 
-            onClick={onBack}
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span>Back to Global Hustle</span>
-          </button>
-          <ThemeToggle />
-        </div>
-      {/* Hustle Header */}
-      <Card className="border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50 dark:border-purple-800 dark:from-purple-900/20 dark:to-blue-900/20">
-        <CardHeader>
-          <div className="flex items-center space-x-4">
-            <div className="p-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl">
-              <Icon className="h-8 w-8 text-white" />
-            </div>
-            <div className="flex-1">
-              <CardTitle className="text-2xl text-gray-900 dark:text-white">{hustle.title}</CardTitle>
-              <CardDescription className="text-lg text-gray-600 dark:text-gray-300 mt-1">
-                {hustle.description}
-              </CardDescription>
-              <div className="flex space-x-4 mt-3">
-                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                  {hustle.earning} per sale
-                </Badge>
-                <Badge variant="secondary" className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                  {hustle.difficulty} difficulty
-                </Badge>
-              </div>
-            </div>
+    <div className="min-h-screen animated-bg relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-accent/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      </div>
+
+      <div className="relative z-10">
+        <div className="container mx-auto px-6 py-8">
+          {/* Enhanced Header with Back Button */}
+          <div className="flex items-center justify-between mb-12 animate-fade-in">
+            <button 
+              onClick={onBack}
+              className="group flex items-center gap-3 px-6 py-3 bg-gradient-glass border border-border/30 rounded-xl text-foreground hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 shadow-card"
+            >
+              <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              <span className="font-semibold">Back to Global Hustle</span>
+            </button>
+            <ThemeToggle />
           </div>
-        </CardHeader>
-      </Card>
-
-      {/* Quick Start Links */}
-      {hustle.links && hustle.links.length > 0 && (
-        <Card className="border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/20">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center space-x-2 text-orange-900 dark:text-orange-300">
-              <Rocket className="h-5 w-5" />
-              <span>Quick Start Links - Get Started Now!</span>
-            </CardTitle>
-            <CardDescription className="text-orange-700 dark:text-orange-400">
-              Click these links to start implementing this hustle immediately
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-              {hustle.links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 p-3 bg-white dark:bg-gray-800 rounded-lg border border-orange-200 dark:border-orange-700 hover:border-orange-300 dark:hover:border-orange-600 hover:shadow-md transition-all group"
-                >
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-1">
-                      <span className="font-medium text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400">
-                        {link.name}
-                      </span>
-                      <ExternalLink className="h-3 w-3 text-orange-600 dark:text-orange-400" />
+          {/* Spectacular Hustle Header */}
+          <div className="relative mb-12 animate-slide-in">
+            <Card className="glass-card border-0 overflow-hidden shadow-hover">
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-hero opacity-10 animate-gradient-shift" />
+              <div className="absolute inset-0 shimmer" />
+              
+              <CardHeader className="relative z-10 p-8">
+                <div className="flex items-start gap-6">
+                  {/* Enhanced Icon */}
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-primary rounded-2xl blur-lg opacity-60 animate-pulse-glow" />
+                    <div className="relative p-6 bg-gradient-primary rounded-2xl shadow-glow">
+                      <Icon className="h-12 w-12 text-primary-foreground" />
                     </div>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{link.description}</p>
                   </div>
-                </a>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+                  
+                  <div className="flex-1 space-y-4">
+                    <div>
+                      <CardTitle className="text-4xl font-bold gradient-text mb-2 leading-tight">
+                        {hustle.title}
+                      </CardTitle>
+                      <CardDescription className="text-xl text-muted-foreground leading-relaxed">
+                        {hustle.description}
+                      </CardDescription>
+                    </div>
+                    
+                    {/* Enhanced Badges */}
+                    <div className="flex flex-wrap gap-3">
+                      <Badge className="bg-gradient-success text-success-foreground border-0 px-4 py-2 text-sm font-semibold shadow-glow">
+                        💰 {hustle.earning} per sale
+                      </Badge>
+                      <Badge className="bg-gradient-accent text-accent-foreground border-0 px-4 py-2 text-sm font-semibold shadow-glow">
+                        🎯 {hustle.difficulty} difficulty
+                      </Badge>
+                      <Badge className="bg-gradient-secondary text-secondary-foreground border-0 px-4 py-2 text-sm font-semibold shadow-glow">
+                        🚀 3-Phase System
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
 
-      {/* Phase Progress */}
+          {/* Revolutionary Quick Start Section */}
+          {hustle.links && hustle.links.length > 0 && (
+            <div className="mb-12 animate-scale-in" style={{ animationDelay: '0.2s' }}>
+              <Card className="glass-card border-0 shadow-hover overflow-hidden">
+                {/* Pulsing Background */}
+                <div className="absolute inset-0 bg-gradient-secondary opacity-5 animate-pulse-glow" />
+                
+                <CardHeader className="relative z-10 pb-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-gradient-secondary rounded-lg animate-pulse-glow">
+                      <Rocket className="h-6 w-6 text-secondary-foreground" />
+                    </div>
+                    <CardTitle className="text-2xl font-bold gradient-text">
+                      🚀 Quick Start Launch Pad
+                    </CardTitle>
+                  </div>
+                  <CardDescription className="text-lg text-muted-foreground">
+                    Click these links to start implementing this hustle immediately. Each link is hand-picked for maximum results.
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {hustle.links.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative p-4 bg-gradient-glass border border-border/30 rounded-xl hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-500 hover:scale-105 hover:shadow-hover"
+                      >
+                        {/* Glow Effect on Hover */}
+                        <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-100 rounded-xl blur-xl transition-opacity duration-500 -z-10" />
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-2 h-2 bg-gradient-accent rounded-full animate-pulse" />
+                            <span className="font-bold text-sm group-hover:text-primary-foreground">
+                              {link.name}
+                            </span>
+                            <ExternalLink className="h-4 w-4 ml-auto group-hover:text-primary-foreground group-hover:scale-110 transition-transform duration-300" />
+                          </div>
+                          <p className="text-xs text-muted-foreground group-hover:text-primary-foreground/80 leading-relaxed">
+                            {link.description}
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Phase Progress */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
@@ -299,6 +343,7 @@ export const PhaseDetails = ({ hustle, selectedPhase, onPhaseChange, onBack }: P
           </div>
         </CardContent>
       </Card>
+        </div>
       </div>
     </div>
   );

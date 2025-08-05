@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LucideIcon, ExternalLink } from "lucide-react";
+import { LucideIcon, ExternalLink, Sparkles, TrendingUp, Zap } from "lucide-react";
 
 interface HustleCardProps {
   hustle: {
@@ -28,57 +28,93 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+        return "bg-gradient-success text-success-foreground shadow-glow";
       case "Medium":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
+        return "bg-gradient-secondary text-secondary-foreground shadow-glow";
       case "Hard":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
+        return "bg-gradient-accent text-accent-foreground shadow-glow";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
+        return "bg-muted text-muted-foreground";
+    }
+  };
+
+  const getDifficultyIcon = (difficulty: string) => {
+    switch (difficulty) {
+      case "Easy":
+        return <Sparkles className="w-3 h-3" />;
+      case "Medium":
+        return <TrendingUp className="w-3 h-3" />;
+      case "Hard":
+        return <Zap className="w-3 h-3" />;
+      default:
+        return null;
     }
   };
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 cursor-pointer bg-white dark:bg-gray-800" onClick={onClick}>
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
+    <Card className="group glass-card interactive-hover border-0 cursor-pointer relative overflow-hidden">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-all duration-500" />
+      
+      {/* Shimmer Effect */}
+      <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      
+      <CardHeader className="pb-4 relative z-10">
+        <div className="flex items-start justify-between mb-4">
           <div className="flex items-center space-x-3">
             {hustle.number && (
-              <div className="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-full flex items-center justify-center text-sm font-semibold">
+              <div className="flex-shrink-0 w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center text-sm font-bold text-primary-foreground shadow-glow group-hover:scale-110 transition-transform duration-300">
                 {hustle.number}
               </div>
             )}
-            <div className="p-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg group-hover:scale-110 transition-transform">
-              <Icon className="h-5 w-5 text-white" />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-primary rounded-xl blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative p-3 bg-gradient-primary rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <Icon className="h-6 w-6 text-primary-foreground" />
+              </div>
             </div>
           </div>
-          <div className="flex space-x-2">
-            <Badge variant="secondary" className={getDifficultyColor(hustle.difficulty)}>
-              {hustle.difficulty}
-            </Badge>
-          </div>
+          
+          <Badge className={`${getDifficultyColor(hustle.difficulty)} border-0 px-3 py-1 text-xs font-semibold flex items-center gap-1`}>
+            {getDifficultyIcon(hustle.difficulty)}
+            {hustle.difficulty}
+          </Badge>
         </div>
-        <CardTitle className="text-lg group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors dark:text-white">
+
+        <CardTitle className="text-xl font-bold text-foreground group-hover:gradient-text transition-all duration-300 leading-tight">
           {hustle.title}
         </CardTitle>
-        <CardDescription className="text-sm line-clamp-2 dark:text-gray-400">
+        
+        <CardDescription className="text-muted-foreground leading-relaxed">
           {hustle.description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="pt-0">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Earning Potential</p>
-            <p className="font-semibold text-green-600 dark:text-green-400">{hustle.earning}</p>
+
+      <CardContent className="pt-0 relative z-10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="space-y-1">
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Earning Potential</p>
+            <p className="text-lg font-bold gradient-text">{hustle.earning}</p>
           </div>
-          <Button variant="outline" size="sm" className="group-hover:bg-purple-50 dark:group-hover:bg-purple-900/20 group-hover:border-purple-300 dark:group-hover:border-purple-600">
-            View Details →
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="bg-gradient-primary text-primary-foreground border-0 hover:scale-105 transition-all duration-300 shadow-glow font-semibold"
+          >
+            Launch Now →
           </Button>
         </div>
+
+        {/* Quick Start Links */}
         {hustle.links && hustle.links.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">Quick Start Links:</p>
-            <div className="flex flex-wrap gap-1">
+          <div className="mt-4 pt-4 border-t border-border/50">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-gradient-accent rounded-full animate-pulse" />
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Quick Start</p>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
               {hustle.links.slice(0, 2).map((link, index) => (
                 <a
                   key={index}
@@ -86,15 +122,33 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center space-x-1 text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-2 py-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs bg-gradient-glass px-3 py-1.5 rounded-lg border border-border/30 text-foreground hover:bg-gradient-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105"
                 >
-                  <span>{link.name}</span>
+                  <span className="font-medium">{link.name}</span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
               ))}
+              
+              {hustle.links.length > 2 && (
+                <div className="inline-flex items-center text-xs text-muted-foreground px-2 py-1">
+                  +{hustle.links.length - 2} more
+                </div>
+              )}
             </div>
           </div>
         )}
+
+        {/* Progress Indicator */}
+        <div className="mt-4 pt-4 border-t border-border/50">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-muted-foreground">3-Phase System</span>
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-gradient-primary rounded-full" />
+              <div className="w-2 h-2 bg-gradient-secondary rounded-full" />
+              <div className="w-2 h-2 bg-gradient-success rounded-full" />
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
