@@ -52,7 +52,7 @@ export const HustleCard = ({ hustle, onClick }: HustleCardProps) => {
   };
 
   return (
-    <Card className="group glass-card interactive-hover border-0 cursor-pointer relative overflow-hidden">
+    <Card onClick={onClick} className="group glass-card interactive-hover border-0 cursor-pointer relative overflow-hidden">
       {/* Animated Background Gradient */}
       <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-all duration-500" />
       
